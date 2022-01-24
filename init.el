@@ -80,6 +80,8 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (add-to-list 'load-path (concat user-emacs-directory "lisp"))
+
 (require 'init-basic)
 (require 'init-prog)
+(require 'init-org)
 (require 'custom-keybindings)
