@@ -48,12 +48,16 @@
       doom-themes-enable-italic t)
 (load-theme 'doom-wilmersdorf t)
 
-(doom-themes-org-config)
+(straight-use-package 'solaire-mode)
+(solaire-global-mode)
 
 ;; Perfect modeline.
 (straight-use-package 'doom-modeline)
 (add-hook 'after-init-hook 'doom-modeline-mode)
 (setq doom-modeline-buffer-encoding nil)
+
+(straight-use-package 'hide-mode-line)
+(add-hook 'vterm-mode-hook 'hide-mode-line-mode)
 
 ;; Popup that makes life easier.
 (straight-use-package 'which-key)
