@@ -7,6 +7,10 @@
 ;; LSP, Emacs as IDE Setup.
 (straight-use-package 'lsp-mode)
 (require 'lsp-mode)
+(defun custom/lsp-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'lsp-mode-hook #'custom/lsp-hooks)
 
 ;; For C & C++.
 (add-hook 'c-mode-hook #'lsp)
