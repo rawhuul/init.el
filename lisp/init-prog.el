@@ -4,24 +4,20 @@
 (straight-use-package 'fixmee)
 (global-fixmee-mode +1)
 
-
-;; Emacs as IDE Setup.
-(straight-use-package 'eglot)
-(require 'eglot)
-(add-hook 'eglot--managed-mode-hook #'(lambda () (add-hook 'before-save-hook 'eglot-format nil t)))
+;; LSP, Emacs as IDE Setup.
+(straight-use-package 'lsp-mode)
+(require 'lsp-mode)
 
 ;; For C & C++.
-(add-to-list 'eglot-server-programs '((c-mode c++-mode) . ("clangd" "--clang-tidy")))
-(add-hook 'c-mode-hook 'eglot-ensure)
-(add-hook 'c++-mode-hook 'eglot-ensure)
+(add-hook 'c-mode-hook #'lsp)
+(add-hook 'c++-mode-hook #'lsp)
+
 ;; For Python.
-(add-to-list 'eglot-server-programs '((python-mode) . ("pyls")))
-(add-hook 'python-mode-hook 'eglot-ensure)
+(add-hook 'python-mode-hook #'lsp)
 
 ;; For Rust.
 (straight-use-package 'rust-mode)
-(add-to-list 'eglot-server-programs '((rust-mode) . ("rust-analyzer")))
-(add-hook 'rust-mode-hook 'eglot-ensure)
+(add-hook 'rust-mode-hook #'lsp)
 
 ;; Go colorful with Tree-sitter.
 (straight-use-package 'tree-sitter)
