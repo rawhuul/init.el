@@ -1,19 +1,32 @@
+;; #Blessed
 (straight-use-package '(org :type built-in))
 
+;; Doesn't first impression matters??
+(setq org-startup-indented t)
+(setq org-pretty-entities t)
+(setq org-hide-emphasis-markers t)
+(setq org-startup-with-inline-images t)
+(setq org-image-actual-width '(300))
+
+;; Makes sense.
 (add-hook 'org-mode-hook 'org-indent-mode)
 
-;; (setq org-src-preserve-indentation nil
-;;       org-src-tab-acts-natively t
-;;       org-edit-src-content-indentation 0)
+;; Bells to organized mode
+(straight-use-package 'org-superstar)
+(setq org-superstar-special-todo-items t)
+(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
 
-;; (setq org-fontify-quote-and-verse-blocks nil)
+;; Useful to see links.
+(straight-use-package 'org-appear)
+(add-hook 'org-mode-hook 'org-appear-mode)
 
-;; (setq org-src-fontify-natively nil
-;;       org-src-tab-acts-natively t
-;;       org-confirm-babel-evaluate nil
-;;       org-edit-src-content-indentation 0)
+;; Hotness!
+(straight-use-package
+ '(org-roam-ui :host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out") ))
 
-(straight-use-package 'org-bullets)
-(add-hook 'org-mode-hook 'org-bullets-mode)
+(setq org-roam-ui-sync-theme t)
+(setq org-roam-ui-follow t)    
+(setq org-roam-ui-update-on-save t)
+(setq org-roam-ui-open-on-start t)
 
 (provide 'init-org)
