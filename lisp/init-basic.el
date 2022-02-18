@@ -48,14 +48,6 @@
       doom-themes-enable-italic t)
 (load-theme 'doom-wilmersdorf t)
 
-(straight-use-package 'solaire-mode)
-(solaire-global-mode)
-
-(add-hook 'after-make-frame-functions
-          (lambda (_frame)
-            (load-theme 'doom-wilmersdorf t)
-            (solaire-mode-swap-bg)))
-
 ;; Perfect modeline.
 (straight-use-package 'doom-modeline)
 (add-hook 'after-init-hook 'doom-modeline-mode)
