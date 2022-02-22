@@ -10,26 +10,42 @@
 ;; Emacs knocking off vscode.
 (straight-use-package 'lsp-mode)
 (require 'lsp-mode)
+(defun lsp-before-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
 
 ;; C, forever.
 (add-hook 'c-mode-hook #'lsp)
-(add-hook 'c-mode-hook #'(lambda ()
-			     (add-hook 'before-save-hook #'lsp-format-buffer t t)))
+(add-hook 'c-mode-hook #'lsp-before-save-hooks)
 
 ;; Pure, nonsense.
 (add-hook 'c++-mode-hook #'lsp)
-(add-hook 'c++-mode-hook #'(lambda ()
-			     (add-hook 'before-save-hook #'lsp-format-buffer t t)))
+(add-hook 'c++-mode-hook #'lsp-before-save-hooks)
 
-;; For Python.
+;; For builder, by builder.
+(straight-use-package 'cmake-mode)
+(add-hook 'cmake-mode-hook #'lsp)
+(add-hook 'cmake-mode-hook #'lsp-before-save-hooks)
+
+;; Sweet, cute and little.
+(straight-use-package 'go-mode)
+(add-hook 'go-mode-hook #'lsp)
+(add-hook 'go-mode-hook #'lsp-before-save-hooks)
+
+;; Feeding Snakes.
 (add-hook 'python-mode-hook #'lsp)
 (add-hook 'python-mode-hook 'apheleia-mode)
 
-;; For Rust.
+;; Brown Iron Rod.
 (straight-use-package 'rust-mode)
 (setq rust-format-on-save t)
 (add-hook 'rust-mode-hook #'lsp)
 (add-hook 'rust-mode-hook #'(lambda() (prettify-symbols-mode)))
+
+;; It's where I live
+(straight-use-package 'shfmt)
+(add-hook 'sh-mode-hook 'lsp)
+(add-hook 'sh-mode-hook 'shfmt-on-save-mode)
 
 ;; Just type safe nothing else, and there's no way back -_-
 (straight-use-package 'typescript-mode)
