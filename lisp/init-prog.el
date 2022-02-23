@@ -14,6 +14,9 @@
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 
+;; Ufff, gangsta here.
+(straight-use-package 'haskell-mode)
+
 ;; C, forever.
 (add-hook 'c-mode-hook #'lsp)
 (add-hook 'c-mode-hook #'lsp-before-save-hooks)
@@ -24,13 +27,6 @@
 
 ;; For builder, by builder.
 (straight-use-package 'cmake-mode)
-(add-hook 'cmake-mode-hook #'lsp)
-(add-hook 'cmake-mode-hook #'lsp-before-save-hooks)
-
-;; Sweet, cute and little.
-(straight-use-package 'go-mode)
-(add-hook 'go-mode-hook #'lsp)
-(add-hook 'go-mode-hook #'lsp-before-save-hooks)
 
 ;; Feeding Snakes.
 (add-hook 'python-mode-hook #'lsp)
@@ -44,7 +40,6 @@
 
 ;; It's where I live
 (straight-use-package 'shfmt)
-(add-hook 'sh-mode-hook 'lsp)
 (add-hook 'sh-mode-hook 'shfmt-on-save-mode)
 
 ;; Just type safe nothing else, and there's no way back -_-
