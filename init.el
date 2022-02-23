@@ -51,13 +51,18 @@
 (add-to-list 'recentf-exclude no-littering-etc-directory)
 (recentf-mode +1)
 
-(setq savehist-additional-variables
+(setq history-length 25
+      savehist-additional-variables
       '(search-ring regexp-search-ring)
       savehist-autosave-interval 60
       savehist-file (expand-file-name "savehist" no-littering-etc-directory))
 (savehist-mode +1)
 
 (electric-pair-mode +1)
+
+;; Auto loadd file on change.
+(global-auto-revert-mode +1)
+(setq global-auto-revert-non-file-buffers t)
 
 ;; built-in packages
 (set-face-background 'show-paren-match "#262b36")
