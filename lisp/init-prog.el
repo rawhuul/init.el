@@ -68,6 +68,10 @@
 (add-hook 'svelte-mode-hook #'emmet-mode)
 (add-hook 'svelte-mode-hook #'apheleia-mode)
 
+;; Yes, even in 2022
+(straight-use-package 'php-mode)
+(add-hook 'php-mode-hook #'lsp)
+
 ;; Ahh!! It's very sweet.
 (straight-use-package 'dockerfile-mode)
 

@@ -90,4 +90,8 @@
       company-selection-wrap-around t)
 (company-tng-configure-default)
 
+;; Woohh, present at multiple places at same time, like multiverse.
+(straight-use-package 'multiple-cursors)
+(multiple-cursors-mode)
+
 (provide 'init-basic)
