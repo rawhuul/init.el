@@ -13,4 +13,7 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
+;; Never Loose your cursor
+(global-set-key (kbd "C-q") 'beacon-blink)
+
 (provide 'custom-keybindings)

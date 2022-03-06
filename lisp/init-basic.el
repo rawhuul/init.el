@@ -18,6 +18,15 @@
                                      "\\\\" "://"))
 (global-ligature-mode t)
 
+;; Have some emotions XD.
+(straight-use-package 'emojify)
+
+;; Nyanyanyanyanyanyanyanyanyan
+(straight-use-package 'nyan-mode)
+(setq nyan-wavy-trail t)
+(setq nyan-animate-nyancat t)
+(nyan-mode +1)
+
 ;; Very powerful undo/redo system.
 (straight-use-package 'undo-tree)
 (global-undo-tree-mode +1)
