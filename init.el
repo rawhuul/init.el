@@ -16,6 +16,8 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+(setq straight-check-for-modifications nil)
+
 (setq inhibit-startup-message t)
 (setq fast-but-imprecise-scrolling t)
 (setq visible-bell nil)
@@ -88,5 +90,4 @@
 
 (require 'init-basic)
 (require 'init-prog)
-(require 'init-org)
 (require 'custom-keybindings)

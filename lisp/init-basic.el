@@ -1,5 +1,4 @@
 ;; Ligature for fonts.
-
 (straight-use-package
  '(ligature :type git :host github :repo "mickeynp/ligature.el"))
  
@@ -21,12 +20,6 @@
 ;; Have some emotions XD.
 (straight-use-package 'emojify)
 
-;; Nyanyanyanyanyanyanyanyanyan
-(straight-use-package 'nyan-mode)
-(setq nyan-wavy-trail t)
-(setq nyan-animate-nyancat t)
-(nyan-mode +1)
-
 ;; Very powerful undo/redo system.
 (straight-use-package 'undo-tree)
 (global-undo-tree-mode +1)
@@ -39,9 +32,6 @@
 (set-face-foreground 'highlight-indent-guides-character-face "dimgray")
 (setq highlight-indent-guides-method 'character)
 (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-
-;; Well, it's intresting tho.
-(straight-use-package 'markdown-mode)
 
 ;; Using icons.
 (straight-use-package 'all-the-icons)
@@ -57,28 +47,22 @@
       doom-themes-enable-italic t)
 (load-theme 'doom-wilmersdorf t)
 
-;; Perfect modeline.
+;; OHhhh, this modeline
 (straight-use-package 'doom-modeline)
 (add-hook 'after-init-hook 'doom-modeline-mode)
 (setq doom-modeline-buffer-encoding nil)
+(setq doom-modeline-height 18)
 
-(straight-use-package 'hide-mode-line)
-(add-hook 'vterm-mode-hook 'hide-mode-line-mode)
-
-;; Popup that makes life easier.
-(straight-use-package 'which-key)
-
-;; Easily select items.
+;; Making things a lot easy.
 (straight-use-package 'vertico)
 (vertico-mode +1)
+
+(straight-use-package 'marginalia)
+(marginalia-mode +1)
 
 ;; Emacs completion style enhancement. 
 (straight-use-package 'orderless)
 (setq completion-styles '(orderless))
-
-;; Enrich completion list with annotations.
-(straight-use-package 'marginalia)
-(marginalia-mode +1)
 
 ;; Commands based on the Emacs completion.
 (straight-use-package 'consult)
@@ -101,6 +85,6 @@
 
 ;; Woohh, present at multiple places at same time, like multiverse.
 (straight-use-package 'multiple-cursors)
-(multiple-cursors-mode)
+;; (multiple-cursors-mode)
 
 (provide 'init-basic)

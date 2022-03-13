@@ -1,76 +1,41 @@
-;; Just Developers Things.
-(straight-use-package 'button-lock)
-(require 'button-lock)
-(straight-use-package 'fixmee)
-(global-fixmee-mode +1)
-
-;; Making mess look good.
-(straight-use-package 'apheleia)
+;; Yoo, markdown is quite simple.
+(straight-use-package 'markdown-mode)
 
 ;; Emacs knocking off vscode.
-(straight-use-package 'lsp-mode)
-(require 'lsp-mode)
-(defun lsp-before-save-hooks ()
-  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(straight-use-package 'eglot)
+(require 'eglot)
+(add-hook 'eglot--managed-mode-hook (lambda () (add-hook 'before-save-hook #'eglot-format-buffer nil nil)))
+
+;; C, forever.
+(add-to-list 'eglot-server-programs '((c-mode c++-mode) . ("clangd")))
+(add-hook 'c-mode-hook #'eglot-ensure)
+;; Pure, nonsense.
+(add-hook 'c++-mode-hook #'eglot-ensure)
 
 ;; Ufff, gangsta here.
 (straight-use-package 'haskell-mode)
-
-;; C, forever.
-(add-hook 'c-mode-hook #'lsp)
-(add-hook 'c-mode-hook #'lsp-before-save-hooks)
-
-;; Pure, nonsense.
-(add-hook 'c++-mode-hook #'lsp)
-(add-hook 'c++-mode-hook #'lsp-before-save-hooks)
+(add-to-list 'eglot-server-programs '((haskell-mode) . ("haskell-language-server")))
+(add-hook 'haskell-mode-hook #'eglot-ensure)
 
 ;; For builder, by builder.
 (straight-use-package 'cmake-mode)
 
 ;; Feeding Snakes.
-(add-hook 'python-mode-hook #'lsp)
-(add-hook 'python-mode-hook 'apheleia-mode)
+(add-hook 'python-mode-hook #'eglot-ensure)
 
-;; Brown Iron Rod.
+;; Cute fiddly language.
 (straight-use-package 'rust-mode)
 (setq rust-format-on-save t)
-(add-hook 'rust-mode-hook #'lsp)
+(add-to-list 'eglot-server-programs '((rust-mode) . ("rust-analyzer")))
+(add-hook 'rust-mode-hook #'eglot-ensure)
 (add-hook 'rust-mode-hook #'(lambda() (prettify-symbols-mode)))
 
 ;; It's where I live
 (straight-use-package 'shfmt)
 (add-hook 'sh-mode-hook 'shfmt-on-save-mode)
 
-;; Just type safe nothing else, and there's no way back -_-
-(straight-use-package 'typescript-mode)
-(add-hook 'typescript-mode-hook #'lsp)
-(add-hook 'typescript-mode-hook #'apheleia-mode)
-(add-hook 'js-mode-hook #'lsp)
-(add-hook 'js-mode-hook #'apheleia-mode)
-
-;; Future is here.
-(straight-use-package 'web-mode)
-
-;; Can't describe this in words, but hats off, it's turu love.
-(define-derived-mode svelte-mode web-mode "Svelte"
-  "Svelte is amazing.")
-
-(defun custom-svelte-mode-hook ()
-  "Hooks for Svelte mode."
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2))
-(add-hook 'svelte-mode-hook 'custom-svelte-mode-hook)
-
-(add-to-list 'auto-mode-alist '("\\.svelte\\'" . svelte-mode))
-(add-hook 'svelte-mode-hook #'lsp)
-(add-hook 'svelte-mode-hook #'emmet-mode)
-(add-hook 'svelte-mode-hook #'apheleia-mode)
-
 ;; Yes, even in 2022
 (straight-use-package 'php-mode)
-(add-hook 'php-mode-hook #'lsp)
 
 ;; Ahh!! It's very sweet.
 (straight-use-package 'dockerfile-mode)
@@ -81,17 +46,14 @@
 (global-tree-sitter-mode) 
 (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 
-;; GIT on steroids.
-(straight-use-package 'magit)
-
-;; Terminal, where I live.
-(straight-use-package 'vterm)
-(straight-use-package 'vterm-toggle)
-(add-hook 'vterm-mode-hook (lambda () (display-line-numbers-mode -1)))
-
 ;; Less strokes, more completions.
 (straight-use-package 'yasnippet-snippets)
 (yas-global-mode +1)
 (straight-use-package 'emmet-mode)
+
+;; What's a developer without a terminal.
+(straight-use-package 'vterm)
+(straight-use-package 'vterm-toggle)
+(add-hook 'vterm-mode-hook (lambda () (display-line-numbers-mode -1)))
 
 (provide 'init-prog)
