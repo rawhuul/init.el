@@ -1,7 +1,7 @@
 ;; Ligature for fonts.
 (straight-use-package
  '(ligature :type git :host github :repo "mickeynp/ligature.el"))
- 
+
 (ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
                                      ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
                                      "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
@@ -48,10 +48,8 @@
 (load-theme 'doom-wilmersdorf t)
 
 ;; OHhhh, this modeline
-(straight-use-package 'doom-modeline)
-(add-hook 'after-init-hook 'doom-modeline-mode)
-(setq doom-modeline-buffer-encoding nil)
-(setq doom-modeline-height 18)
+(straight-use-package 'mood-line)
+(mood-line-mode +1)
 
 ;; Making things a lot easy.
 (straight-use-package 'vertico)
@@ -60,7 +58,7 @@
 (straight-use-package 'marginalia)
 (marginalia-mode +1)
 
-;; Emacs completion style enhancement. 
+;; Emacs completion style enhancement.
 (straight-use-package 'orderless)
 (setq completion-styles '(orderless))
 
@@ -85,6 +83,6 @@
 
 ;; Woohh, present at multiple places at same time, like multiverse.
 (straight-use-package 'multiple-cursors)
-;; (multiple-cursors-mode)
+(multiple-cursors-mode +1)
 
 (provide 'init-basic)

@@ -1,3 +1,6 @@
+;; Auto delimiter pairing
+(add-hook 'prog-mode-hook 'electric-pair-local-mode)
+
 ;; Yoo, markdown is quite simple.
 (straight-use-package 'markdown-mode)
 
@@ -7,14 +10,13 @@
 (add-hook 'eglot--managed-mode-hook (lambda () (add-hook 'before-save-hook #'eglot-format-buffer nil nil)))
 
 ;; C, forever.
-(add-to-list 'eglot-server-programs '((c-mode c++-mode) . ("clangd")))
+(add-to-list 'eglot-server-programs '((c-mode c++-mode) . ("clangd" "--all-scopes-completion" "--header-insertion-decorators=0" "--completion-style=bundled" "--header-insertion=iwyu" "--clang-tidy")))
 (add-hook 'c-mode-hook #'eglot-ensure)
 ;; Pure, nonsense.
 (add-hook 'c++-mode-hook #'eglot-ensure)
 
 ;; Ufff, gangsta here.
 (straight-use-package 'haskell-mode)
-(add-to-list 'eglot-server-programs '((haskell-mode) . ("haskell-language-server")))
 (add-hook 'haskell-mode-hook #'eglot-ensure)
 
 ;; For builder, by builder.
@@ -25,10 +27,23 @@
 
 ;; Cute fiddly language.
 (straight-use-package 'rust-mode)
-(setq rust-format-on-save t)
-(add-to-list 'eglot-server-programs '((rust-mode) . ("rust-analyzer")))
 (add-hook 'rust-mode-hook #'eglot-ensure)
 (add-hook 'rust-mode-hook #'(lambda() (prettify-symbols-mode)))
+
+;; Just some typess..
+(straight-use-package 'typescript-mode)
+(add-to-list 'eglot-server-programs '((js-mode typescript-mode) . (eglot-deno "deno" "lsp")))
+
+(defclass eglot-deno (eglot-lsp-server) ()
+  :documentation "A custom class for deno lsp.")
+
+(cl-defmethod eglot-initialization-options ((server eglot-deno))
+  "Passes through required deno initialization options"
+  (list :enable t
+	:lint t))
+
+(add-hook 'js-mode-hook #'eglot-ensure)
+(add-hook 'typescript-mode-hook #'eglot-ensure)
 
 ;; It's where I live
 (straight-use-package 'shfmt)
@@ -48,8 +63,9 @@
 
 ;; Less strokes, more completions.
 (straight-use-package 'yasnippet-snippets)
+(setq yas-also-auto-indent-first-line t)
+(setq yas-also-indent-empty-lines t)
 (yas-global-mode +1)
-(straight-use-package 'emmet-mode)
 
 ;; What's a developer without a terminal.
 (straight-use-package 'vterm)

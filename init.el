@@ -60,8 +60,6 @@
       savehist-file (expand-file-name "savehist" no-littering-etc-directory))
 (savehist-mode +1)
 
-(electric-pair-mode +1)
-
 ;; Auto loadd file on change.
 (global-auto-revert-mode +1)
 (setq global-auto-revert-non-file-buffers t)
