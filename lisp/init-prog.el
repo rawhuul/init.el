@@ -15,10 +15,6 @@
 ;; Pure, nonsense.
 (add-hook 'c++-mode-hook #'eglot-ensure)
 
-;; Ufff, gangsta here.
-(straight-use-package 'haskell-mode)
-(add-hook 'haskell-mode-hook #'eglot-ensure)
-
 ;; For builder, by builder.
 (straight-use-package 'cmake-mode)
 
@@ -28,7 +24,6 @@
 ;; Cute fiddly language.
 (straight-use-package 'rust-mode)
 (add-hook 'rust-mode-hook #'eglot-ensure)
-(add-hook 'rust-mode-hook #'(lambda() (prettify-symbols-mode)))
 
 ;; Just some typess..
 (straight-use-package 'typescript-mode)
@@ -54,12 +49,6 @@
 
 ;; Ahh!! It's very sweet.
 (straight-use-package 'dockerfile-mode)
-
-;; Go colorful with Tree-sitter.
-(straight-use-package 'tree-sitter)
-(straight-use-package 'tree-sitter-langs)
-(global-tree-sitter-mode) 
-(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 
 ;; Less strokes, more completions.
 (straight-use-package 'yasnippet-snippets)
