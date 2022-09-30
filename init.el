@@ -49,9 +49,9 @@
 (setq split-width-threshold nil)
 (setq electric-pair-preserve-balance nil)
 
-(global-hl-line-mode +1)
 (global-visual-line-mode +1)
-(global-prettify-symbols-mode +1)
+(add-hook 'prog-mode-hook 'hl-line-mode)
+(add-hook 'prog-mode-hook 'prettify-symbols-mode)
 
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (setq-default auto-save-default nil
@@ -155,6 +155,10 @@
 (straight-use-package 'doom-modeline)
 (add-hook 'after-init-hook #'doom-modeline-mode)
 
+(straight-use-package 'hide-mode-line)
+(add-hook 'completion-list-mode-hook #'hide-mode-line-mode)
+(add-hook 'vterm-mode-hook #'hide-mode-line-mode)
+
 ;; Making things a lot easy.
 (straight-use-package 'vertico)
 (vertico-mode +1)
@@ -211,6 +215,10 @@
 ;; Cute fiddly language.
 (straight-use-package 'rust-mode)
 (add-hook 'rust-mode-hook #'eglot-ensure)
+
+;; Haskelllll
+(straight-use-package 'haskell-mode)
+(add-hook 'haskell-mode-hook #'eglot-ensure)
 
 ;; Go colorful with Tree-sitter.
 (straight-use-package 'tree-sitter)
