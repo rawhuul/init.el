@@ -1,4 +1,4 @@
-;; init.el
+;; init.el -- Not Novel Config
 
 ;; Code:
 
@@ -18,7 +18,7 @@
 
 (set-face-attribute 'default nil
                     :family "CascadiaCode"
-                    :height 106
+                    :height 120
                     :weight 'normal
                     :width 'normal)
 
@@ -64,6 +64,10 @@
 (straight-use-package 'no-littering)
 (require 'no-littering)
 (setq custom-file (no-littering-expand-etc-file-name "custom.el"))
+
+(straight-use-package 'real-auto-save)
+(setq real-auto-save-interval 2)
+(add-hook 'prog-mode-hook 'real-auto-save-mode)
 
 (require 'recentf)
 (setq recentf-save-file (expand-file-name "recentf" no-littering-etc-directory)
@@ -146,10 +150,11 @@
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 
 ;; A warm theme.
-(straight-use-package 'doom-themes)
+(straight-use-package '
+ doom-themes)
 (setq doom-themes-enable-bold t
       doom-themes-enable-italic t)
-(load-theme 'doom-one-light t)
+(load-theme 'doom-wilmersdorf t)
 
 ;; OHhhh, this modeline
 (straight-use-package 'doom-modeline)
@@ -199,6 +204,9 @@
 ;; Yoo, markdown is quite simple.
 (straight-use-package 'markdown-mode)
 
+;; Just to get everything right.
+;; (add-hook 'emacs-lisp-mode-hook 'flymake-mode)
+
 ;; Emacs knocking off vscode.
 (straight-use-package 'eglot)
 (require 'eglot)
@@ -210,6 +218,12 @@
 (add-hook 'c++-mode-hook #'eglot-ensure)
 
 ;; Feeding Snakes.
+(straight-use-package 'pyvenv)
+;; (setenv "WORKON_HOME" "/home/rahul/Data")
+(pyvenv-activate "$HOME/Data")
+;; (setq pyvenv-mode-line-indicator '(pyvenv-virtual-env-name ("[venv:" pyvenv-virtual-env-name "] ")))
+(pyvenv-mode +1)
+
 (add-hook 'python-mode-hook #'eglot-ensure)
 
 ;; Cute fiddly language.
@@ -223,7 +237,7 @@
 ;; Go colorful with Tree-sitter.
 (straight-use-package 'tree-sitter)
 (straight-use-package 'tree-sitter-langs)
-(global-tree-sitter-mode) 
+(global-tree-sitter-mode +1)
 (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 
 ;; Even code folds
@@ -242,10 +256,15 @@
 (straight-use-package 'vterm-toggle)
 (add-hook 'vterm-mode-hook (lambda () (display-line-numbers-mode -1)))
 
+;; Amazing kbds
+(straight-use-package 'mwim)
+(global-set-key (kbd "C-a") 'mwim-beginning-of-code-or-line)
+(global-set-key (kbd "C-e") 'mwim-end-of-code-or-line)
+(global-set-key (kbd "<home>") 'mwim-beginning-of-line-or-code)
+(global-set-key (kbd "<end>") 'mwim-end-of-line-or-code)
+
 ;; The alias to save life.
 (defalias 'yes-or-no-p 'y-or-n-p)
-
-(add-to-list 'load-path (concat user-emacs-directory "lisp"))
 
 ;; Chopping my fingers.
 (define-key key-translation-map (kbd "ESC") (kbd "C-g"))
